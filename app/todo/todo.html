@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="style.css">
+
+<body ng-app="app" ng-controller="TodoController">
+    <div class="container">
+        <h2><font color="navy" family="Verdana">What is to do?</font></h2>
+
+
+        <form ng-submit="todo.todoAdd()">
+            <div class="form-group">
+                <input type="text" placeholder="Add New" ng-model="todo.todoInput" size="30">  
+                <button type="submit" class="btn btn-success">Add Task</button>
+            </div>
+            
+        </form>
+        <div ng-show="todo.allT">
+            <all-Tasks></all-Tasks>
+        </div>
+
+        <div ng-show="todo.activeT">
+            <active-Tasks></active-Tasks>
+        </div>
+
+        <div ng-show="todo.doneT">
+            <done-Tasks></done-Tasks>
+        </div>
+        <br>
+        <p>
+            <button ng-click="todo.remove()" class="btn btn-danger">Remove marked</button>
+        </p>
+        <p>
+            <button ng-click="todo.showAll()" ng-class="{'btn btn-info': todo.allT, 'btn btn-default': !todo.allT}">All Tasks</button>
+            <button ng-click="todo.showActive()" ng-class="{'btn btn-info': todo.activeT, 'btn btn-default': !todo.activeT}">Active Tasks</button>
+            <button ng-click="todo.showDone()" ng-class="{'btn btn-info': todo.doneT, 'btn btn-default': !todo.doneT}">Done Tasks</button>
+            </button>
+        </p>
+    </div>
