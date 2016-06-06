@@ -56,19 +56,15 @@
 
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 
-	var _firebase = __webpack_require__(13);
-
-	var _firebase2 = _interopRequireDefault(_firebase);
-
-	var _angularfire = __webpack_require__(14);
-
-	var _angularfire2 = _interopRequireDefault(_angularfire);
-
-	var _todo = __webpack_require__(16);
+	var _todo = __webpack_require__(13);
 
 	var _todo2 = _interopRequireDefault(_todo);
 
-	var _config = __webpack_require__(26);
+	var _login = __webpack_require__(26);
+
+	var _login2 = _interopRequireDefault(_login);
+
+	var _config = __webpack_require__(30);
 
 	var _config2 = _interopRequireDefault(_config);
 
@@ -36036,6 +36032,241 @@
 
 /***/ },
 /* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(10);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _angularUiRouter = __webpack_require__(12);
+
+	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
+
+	var _todo = __webpack_require__(14);
+
+	var _todo2 = _interopRequireDefault(_todo);
+
+	var _todo3 = __webpack_require__(16);
+
+	var _todo4 = _interopRequireDefault(_todo3);
+
+	var _allTasks = __webpack_require__(17);
+
+	var _allTasks2 = _interopRequireDefault(_allTasks);
+
+	var _activeTasks = __webpack_require__(19);
+
+	var _activeTasks2 = _interopRequireDefault(_activeTasks);
+
+	var _doneTasks = __webpack_require__(21);
+
+	var _doneTasks2 = _interopRequireDefault(_doneTasks);
+
+	var _firebase = __webpack_require__(23);
+
+	var _firebase2 = _interopRequireDefault(_firebase);
+
+	var _angularfire = __webpack_require__(24);
+
+	var _angularfire2 = _interopRequireDefault(_angularfire);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _angular2.default.module('app.todo', [_angularUiRouter2.default, _angularfire2.default]).config(_todo2.default).controller('TodoController', _todo4.default).directive('allTasks', _allTasks2.default).directive('activeTasks', _activeTasks2.default).directive('doneTasks', _doneTasks2.default).name;
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = routes;
+	function routes($stateProvider) {
+	  $stateProvider.state('todo', {
+	    url: '/',
+	    template: __webpack_require__(15),
+	    controller: 'TodoController',
+	    controllerAs: 'todo'
+	  });
+	}
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	module.exports = "<style type=\"text/css\">\n   body { background: #F8F8F8}\n</style>\n\n<body ng-app=\"app\" ng-controller=\"TodoController\">\n    <div class=\"container\">\n        <h2><b><i><span family=\"Verdana\" class=\"text-primary\">What is to do?</span></i></b></h2>\n        <!--<h2><font color=\"navy\" family=\"Verdana\">What is to do?</font></h2>-->\n\n\n        <form ng-submit=\"todo.todoAdd()\">\n            <div class=\"form-group\">\n                <input type=\"text\" placeholder=\"Add New\" ng-model=\"todo.todoInput\" size=\"30\">  \n                <button type=\"submit\" class=\"btn btn-success\">Add Task</button>\n            </div>\n            \n        </form>\n        <div ng-show=\"todo.allT\">\n            <all-Tasks></all-Tasks>\n        </div>\n\n        <div ng-show=\"todo.activeT\">\n            <active-Tasks></active-Tasks>\n        </div>\n\n        <div ng-show=\"todo.doneT\">\n            <done-Tasks></done-Tasks>\n        </div>\n        <br>\n        <p>\n            <button ng-click=\"todo.remove()\" class=\"btn btn-danger\">Remove marked</button>\n        </p>\n        <p>\n            <button ng-click=\"todo.showAll()\" ng-class=\"{'btn btn-info': todo.allT, 'btn btn-default': !todo.allT}\">All Tasks</button>\n            <button ng-click=\"todo.showActive()\" ng-class=\"{'btn btn-info': todo.activeT, 'btn btn-default': !todo.activeT}\">Active Tasks</button>\n            <button ng-click=\"todo.showDone()\" ng-class=\"{'btn btn-info': todo.doneT, 'btn btn-default': !todo.doneT}\">Done Tasks</button>\n            </button>\n        </p>\n    </div>\n";
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	/*global angular */
+	/*global Firebase */
+
+	var TodoController = function () {
+	    function TodoController($firebaseArray) {
+	        _classCallCheck(this, TodoController);
+
+	        this.allT = true;
+
+	        var ref = new Firebase("https://geoinformatyka.firebaseio.com/items");
+	        this.todoList = $firebaseArray(ref);
+	        this.counter = this.todoList.length;
+	    }
+
+	    _createClass(TodoController, [{
+	        key: "todoAdd",
+	        value: function todoAdd() {
+	            this.todoList.$add({
+	                todoText: this.todoInput,
+	                done: false,
+	                index: this.counter++
+	            });
+	            this.todoInput = "";
+	            console.log(this.counter);
+	        }
+	    }, {
+	        key: "remove",
+	        value: function remove() {
+	            var i;
+	            for (i = 0; i < this.todoList.length; i++) {
+	                if (this.todoList[i].done) this.todoList.$remove(i);
+	            }
+	            if (this.doneT) this.showDone();
+	        }
+	    }, {
+	        key: "checkStatus",
+	        value: function checkStatus() {
+	            var doneTasks = [];
+	            var activeTasks = [];
+	            var i;
+	            for (i = 0; i < this.todoList.length; i++) {
+	                if (this.todoList[i].done) doneTasks.push(this.todoList[i]);else activeTasks.push(this.todoList[i]);
+	            }
+	            this.doneTasks = doneTasks;
+	            this.activeTasks = activeTasks;
+	        }
+	    }, {
+	        key: "showAll",
+	        value: function showAll() {
+	            this.checkStatus();
+	            this.activeT = false;
+	            this.doneT = false;
+	            this.allT = true;
+	        }
+	    }, {
+	        key: "showActive",
+	        value: function showActive() {
+	            this.checkStatus();
+	            this.activeT = true;
+	            this.doneT = false;
+	            this.allT = false;
+	        }
+	    }, {
+	        key: "showDone",
+	        value: function showDone() {
+	            this.checkStatus();
+	            this.doneT = true;
+	            this.allT = false;
+	            this.activeT = false;
+	        }
+	    }]);
+
+	    return TodoController;
+	}();
+
+	exports.default = TodoController;
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = allTasks;
+	function allTasks() {
+	  return {
+	    restrict: 'E',
+	    template: __webpack_require__(18)
+	  };
+	}
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n    <div ng-repeat=\"x in todo.todoList\">\n        <input type=\"checkbox\" ng-model=\"x.done\"> <span ng-bind=\"x.todoText\"></span>\n    </div>\n</div>\n\n\n";
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = activeTasks;
+	function activeTasks() {
+	  return {
+	    restrict: 'E',
+	    template: __webpack_require__(20)
+	  };
+	}
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n    <div ng-repeat=\"x in todo.activeTasks\">\n        <input type=\"checkbox\" ng-model=\"x.done\"> <span ng-bind=\"x.todoText\" class=\"bg-success\"></span>\n    </div>\n</div>";
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = doneTasks;
+	function doneTasks() {
+	  return {
+	    restrict: 'E',
+	    template: __webpack_require__(22)
+	  };
+	}
+
+/***/ },
+/* 22 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n    <div ng-repeat=\"x in todo.doneTasks\">\n        <input type=\"checkbox\" ng-model=\"x.done\"> <del><span ng-bind=\"x.todoText\" class=\"bg-warning\"></span></del>\n    </div>\n</div>";
+
+/***/ },
+/* 23 */
 /***/ function(module, exports) {
 
 	/*! @license Firebase v2.4.2
@@ -36321,15 +36552,15 @@
 
 
 /***/ },
-/* 14 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(15);
+	__webpack_require__(25);
 	module.exports = 'firebase';
 
 
 /***/ },
-/* 15 */
+/* 25 */
 /***/ function(module, exports) {
 
 	/*!
@@ -38673,7 +38904,7 @@
 
 
 /***/ },
-/* 16 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38690,32 +38921,28 @@
 
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 
-	var _todo = __webpack_require__(17);
+	var _login = __webpack_require__(27);
 
-	var _todo2 = _interopRequireDefault(_todo);
+	var _login2 = _interopRequireDefault(_login);
 
-	var _todo3 = __webpack_require__(19);
+	var _login3 = __webpack_require__(29);
 
-	var _todo4 = _interopRequireDefault(_todo3);
+	var _login4 = _interopRequireDefault(_login3);
 
-	var _allTasks = __webpack_require__(20);
+	var _firebase = __webpack_require__(23);
 
-	var _allTasks2 = _interopRequireDefault(_allTasks);
+	var _firebase2 = _interopRequireDefault(_firebase);
 
-	var _activeTasks = __webpack_require__(22);
+	var _angularfire = __webpack_require__(24);
 
-	var _activeTasks2 = _interopRequireDefault(_activeTasks);
-
-	var _doneTasks = __webpack_require__(24);
-
-	var _doneTasks2 = _interopRequireDefault(_doneTasks);
+	var _angularfire2 = _interopRequireDefault(_angularfire);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _angular2.default.module('app.todo', [_angularUiRouter2.default]).config(_todo2.default).controller('TodoController', _todo4.default).directive('allTasks', _allTasks2.default).directive('activeTasks', _activeTasks2.default).directive('doneTasks', _doneTasks2.default).name;
+	exports.default = _angular2.default.module('app.login', [_angularUiRouter2.default, _angularfire2.default]).config(_login2.default).controller('LoginController', _login4.default).name;
 
 /***/ },
-/* 17 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38725,178 +38952,70 @@
 	});
 	exports.default = routes;
 	function routes($stateProvider) {
-	  $stateProvider.state('home', {
+	  $stateProvider.state('login', {
 	    url: '/',
-	    template: __webpack_require__(18),
-	    controller: 'TodoController',
-	    controllerAs: 'todo'
+	    template: __webpack_require__(28),
+	    controller: 'LoginController',
+	    controllerAs: 'login'
 	  });
 	}
 
 /***/ },
-/* 18 */
+/* 28 */
 /***/ function(module, exports) {
 
-	module.exports = "<link rel=\"stylesheet\" href=\"style.css\">\n\n<body ng-app=\"app\" ng-controller=\"TodoController\">\n    <div class=\"container\">\n        <h2><font color=\"navy\" family=\"Verdana\">What is to do?</font></h2>\n\n\n        <form ng-submit=\"todo.todoAdd()\">\n            <div class=\"form-group\">\n                <input type=\"text\" placeholder=\"Add New\" ng-model=\"todo.todoInput\" size=\"30\">  \n                <button type=\"submit\" class=\"btn btn-success\">Add Task</button>\n            </div>\n            \n        </form>\n        <div ng-show=\"todo.allT\">\n            <all-Tasks></all-Tasks>\n        </div>\n\n        <div ng-show=\"todo.activeT\">\n            <active-Tasks></active-Tasks>\n        </div>\n\n        <div ng-show=\"todo.doneT\">\n            <done-Tasks></done-Tasks>\n        </div>\n        <br>\n        <p>\n            <button ng-click=\"todo.remove()\" class=\"btn btn-danger\">Remove marked</button>\n        </p>\n        <p>\n            <button ng-click=\"todo.showAll()\" ng-class=\"{'btn btn-info': todo.allT, 'btn btn-default': !todo.allT}\">All Tasks</button>\n            <button ng-click=\"todo.showActive()\" ng-class=\"{'btn btn-info': todo.activeT, 'btn btn-default': !todo.activeT}\">Active Tasks</button>\n            <button ng-click=\"todo.showDone()\" ng-class=\"{'btn btn-info': todo.doneT, 'btn btn-default': !todo.doneT}\">Done Tasks</button>\n            </button>\n        </p>\n    </div>\n";
+	module.exports = "\n\n<form ng-submit=\"login.addNote()\">\n            <div class=\"form-group\">\n                <input type=\"text\" placeholder=\"Add New\" ng-model=\"login.loginMail\" size=\"30\">  \n                <button type=\"submit\" class=\"btn btn-success\">Add New</button>\n            </div>\n            \n            \n            \n            <div class=\"col-md-4\">\n    <table class=\"table\">\n        <tr ng-repeat=\"item in login.items\">\n            <td>{{item.text}}</td>\n            \n        </tr>\n    </table>\n    \n    <form ng-submit=\"login.removeNote()\">\n            <div class=\"form-group\">\n                <input type=\"text\" placeholder=\"Add New\" ng-model=\"login.loginMail\" size=\"30\">  \n                <button type=\"submit\" class=\"btn btn-danger\">Add New</button>\n            </div>";
 
 /***/ },
-/* 19 */
+/* 29 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	/*global angular */
+	/*global Firebase */
 
-	var TodoController = function () {
-	    function TodoController() {
-	        _classCallCheck(this, TodoController);
+	var LoginController = function () {
+	  function LoginController($firebaseArray) {
+	    _classCallCheck(this, LoginController);
 
-	        this.todoList = [{ todoText: 'First Task', done: false }];
-	        this.allT = true;
+	    // let ref = new Firebase("https://geoinf-todo.firebaseio.com");
+	    var ref = new Firebase("https://geoinformatyka.firebaseio.com/items");
+	    this.items = $firebaseArray(ref);
+	  }
+
+	  _createClass(LoginController, [{
+	    key: 'addNote',
+	    value: function addNote() {
+	      this.items.$add({ text: 'NOWY!' });
 	    }
+	  }, {
+	    key: 'removeNote',
+	    value: function removeNote() {
+	      this.items.$remove({ text: 'NOWY!' });
+	    }
+	  }, {
+	    key: 'getItems',
+	    value: function getItems() {
+	      console.log(this.items.text);
+	      return this.items;
+	    }
+	  }]);
 
-	    _createClass(TodoController, [{
-	        key: "todoAdd",
-	        value: function todoAdd() {
-	            this.todoList.push({ todoText: this.todoInput, done: false });
-	            this.todoInput = "";
-	        }
-	    }, {
-	        key: "remove",
-	        value: function remove() {
-	            var oldList = this.todoList;
-	            var newList = [];
-	            this.todoList = [];
-	            angular.forEach(oldList, function (x) {
-	                if (!x.done) {
-	                    newList.push(x);
-	                }
-	            });
-	            this.todoList = newList;
-	            this.checkStatus();
-	        }
-	    }, {
-	        key: "checkStatus",
-	        value: function checkStatus() {
-	            var oldList = this.todoList;
-	            var doneTasks = [];
-	            var activeTasks = [];
-	            angular.forEach(oldList, function (x) {
-	                if (x.done) doneTasks.push(x);else activeTasks.push(x);
-	            });
-	            this.doneTasks = doneTasks;
-	            this.activeTasks = activeTasks;
-	        }
-	    }, {
-	        key: "showAll",
-	        value: function showAll() {
-	            this.checkStatus();
-	            this.activeT = false;
-	            this.doneT = false;
-	            this.allT = true;
-	        }
-	    }, {
-	        key: "showActive",
-	        value: function showActive() {
-	            this.checkStatus();
-	            this.activeT = true;
-	            this.doneT = false;
-	            this.allT = false;
-	        }
-	    }, {
-	        key: "showDone",
-	        value: function showDone() {
-	            this.checkStatus();
-	            this.doneT = true;
-	            this.allT = false;
-	            this.activeT = false;
-	        }
-	    }]);
-
-	    return TodoController;
+	  return LoginController;
 	}();
 
-	exports.default = TodoController;
+	exports.default = LoginController;
 
 /***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = allTasks;
-	function allTasks() {
-	  return {
-	    restrict: 'E',
-	    template: __webpack_require__(21)
-	  };
-	}
-
-/***/ },
-/* 21 */
-/***/ function(module, exports) {
-
-	module.exports = "<div>\n    <div ng-repeat=\"x in todo.todoList\">\n        <input type=\"checkbox\" ng-model=\"x.done\"> <span ng-bind=\"x.todoText\"></span>\n    </div>\n</div>\n\n\n";
-
-/***/ },
-/* 22 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = activeTasks;
-	function activeTasks() {
-	  return {
-	    restrict: 'E',
-	    template: __webpack_require__(23)
-	  };
-	}
-
-/***/ },
-/* 23 */
-/***/ function(module, exports) {
-
-	module.exports = "<div>\n    <div ng-repeat=\"x in todo.activeTasks\">\n        <input type=\"checkbox\" ng-model=\"x.done\"> <span ng-bind=\"x.todoText\"></span>\n    </div>\n</div>";
-
-/***/ },
-/* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = doneTasks;
-	function doneTasks() {
-	  return {
-	    restrict: 'E',
-	    template: __webpack_require__(25)
-	  };
-	}
-
-/***/ },
-/* 25 */
-/***/ function(module, exports) {
-
-	module.exports = "<div>\n    <div ng-repeat=\"x in todo.doneTasks\">\n        <input type=\"checkbox\" ng-model=\"x.done\"> <span ng-bind=\"x.todoText\"></span>\n    </div>\n</div>";
-
-/***/ },
-/* 26 */
+/* 30 */
 /***/ function(module, exports) {
 
 	'use strict';

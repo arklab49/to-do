@@ -1,6 +1,6 @@
 export default function routes($stateProvider) {
   $stateProvider
-    .state('home', {
+    .state('todo', {
       url: '/',
       template: require('./todo.html'),
       controller: 'TodoController',

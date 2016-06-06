@@ -1,5 +1,5 @@
 <div>
     <div ng-repeat="x in todo.doneTasks">
-        <input type="checkbox" ng-model="x.done"> <span ng-bind="x.todoText"></span>
+        <input type="checkbox" ng-model="x.done"> <del><span ng-bind="x.todoText" class="bg-warning"></span></del>
     </div>
 </div>

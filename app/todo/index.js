@@ -7,7 +7,10 @@ import allTasks from './directives/allTasks';
 import activeTasks from './directives/activeTasks';
 import doneTasks from './directives/doneTasks';
 
-export default angular.module('app.todo', [uirouter])
+import firebase from 'firebase';
+import angularFire from 'angularfire';
+
+export default angular.module('app.todo', [uirouter, angularFire])
   .config(routing)
   .controller('TodoController', TodoController)
   .directive('allTasks', allTasks)

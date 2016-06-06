@@ -1,8 +1,11 @@
-<link rel="stylesheet" href="style.css">
+<style type="text/css">
+   body { background: #F8F8F8}
+</style>
 
 <body ng-app="app" ng-controller="TodoController">
     <div class="container">
-        <h2><font color="navy" family="Verdana">What is to do?</font></h2>
+        <h2><b><i><span family="Verdana" class="text-primary">What is to do?</span></i></b></h2>
+        <!--<h2><font color="navy" family="Verdana">What is to do?</font></h2>-->
 
 
         <form ng-submit="todo.todoAdd()">
