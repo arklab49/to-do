@@ -1,7 +1,11 @@
-<div>
-    <div ng-repeat="x in todo.todoList">
-        <input type="checkbox" ng-model="x.done"> <span ng-bind="x.todoText"></span>
+<div ng-show="todo.showAllStats">
+    <div ng-repeat="x in todo.todoList" >
+        <p><input type="checkbox" ng-model="x.done" ng-click="todo.checkUserTasks($event,x.index)"> <font size="4px"><span ng-bind="x.todoText"></span> <span ng-bind="x.mail"></span></font></p>
     </div>
 </div>
 
-
+<div ng-show="!todo.showAllStats">
+    <div ng-repeat="x in todo.myAllTasksList" >
+        <p><input type="checkbox" ng-model="x.done" ng-click="todo.checkUserTasks($event,x.index)"> <font size="4px"><span ng-bind="x.todoText"></span> <span ng-bind="x.mail"></span></font></p>
+    </div>
+</div>
