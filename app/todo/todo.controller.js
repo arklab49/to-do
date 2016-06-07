@@ -22,6 +22,7 @@ export default class TodoController {
         this.myDoneTasksCounter = 0;
     }
     todoAdd() {
+        
         if (this.mail == null) {
             this.errorMessage = "You are not log in!"
         }
@@ -34,73 +35,47 @@ export default class TodoController {
                 mail: this.mail
             });
             this.todoInput = "";
+            this.calcStats();
         }
+
     }
 
     remove() {
         var i;
         for (i = 0; i < this.todoList.length; i++) {
-            if (this.todoList[i].done)
             if(this.mail == this.todoList[i].mail){
-                this.todoList.$remove(i);
+                if (this.todoList[i].done)
+                    this.todoList.$remove(i);
                 this.errorMessage = null;
+                this.calcStats();
             }
             else
-                this.errorMessage = "This task does not belong to you!"
+                this.errorMessage = "This task does not belong to you!";
         }
-            this.showMyList();
-        if (this.doneT == true){
-           this.showDone();
-           console.log("Jestemn");
-        } 
-    }
-    
-     checkStatus() {
-        var tempList = [];
-        if (this.showAllStats) 
-            tempList = this.todoList;
-        else{
-            this.showMyList();
-            tempList = this.myAllTasksList;
-        }
-        var doneTasks = [];
-        var activeTasks = [];
-        var i;
-        for (i = 0; i < tempList.length; i++) {
-            if (tempList[i].done)
-                doneTasks.push(tempList[i]);
-            else
-                activeTasks.push(tempList[i]);
-        }
-        this.doneTasks = doneTasks;
-        this.activeTasks = activeTasks;
-        
+        this.calcStats();
     }
 
     showAll() {
-        this.checkStatus();
         this.activeT = false;
         this.doneT = false;
         this.allT = true;
     }
 
     showActive() {
-        this.checkStatus();
         this.activeT = true;
         this.doneT = false;
         this.allT = false;
     }
 
     showDone() {
-        this.checkStatus();
         this.doneT = true;
         this.allT = false;
         this.activeT = false;
     }
 
+
     logIn() {
         this.errorMessage = null;
-        var i;
         this.guest = false;
         this.calcStats();
     }
@@ -110,25 +85,13 @@ export default class TodoController {
         this.mail = null;
         this.showAllStats = true;
         this.errorMessage = null;
-    }
-    
-    checkUserTasks($event,i) {
-        if ($event.target.checked){
-            this.todoList[i].completed = true;
-            this.calcStats();
-        }
-        else {
-            this.todoList[i].completed = false;
-            this.calcStats();
-        }
-        this.checkStatus();
+        this.showAll();
     }
     
     showStats() {
         this.calcStats();
-        this.showMyList();
         if (!this.showAllStats) {
-            this.statsMessage = "Show only mine tasks";
+            this.statsMessage = "Show only my tasks";
             this.showAllStats = true;
             
         }
@@ -137,19 +100,6 @@ export default class TodoController {
             this.showAllStats = false;
         }
             
-    }
-    
-    showMyList() {
-        var i;
-            var myAllTasksList =[];
-            
-            for (i = 0; i < this.todoList.length; i++) {
-            if (this.todoList[i].mail == this.mail)
-                myAllTasksList.push(this.todoList[i]);
-                
-            this.myAllTasksList = myAllTasksList;
-            // this.checkStatus2();
-        }
     }
     
     calcStats() {
@@ -162,17 +112,17 @@ export default class TodoController {
         this.myDoneTasksCounter = 0;
         for (i = 0; i < this.todoList.length; i++) {
                 this.allTasksCounter++;
-                if(this.todoList[i].mail == this.mail)
-                this.myAllTasksCounter++;
+                 if(this.todoList[i].mail == this.mail)
+                    this.myAllTasksCounter++;
             if (!this.todoList[i].done){
                 this.activeTasksCounter++;
-                    if(this.todoList[i].mail == this.mail)
-                        this.myActiveTasksCounter++;
-            }
+                     if(this.todoList[i].mail == this.mail)
+                         this.myActiveTasksCounter++;
+             }
             else {
                 this.doneTasksCounter++;
                     if(this.todoList[i].mail == this.mail)
-                        this.myDoneTasksCounter++;
+                         this.myDoneTasksCounter++;
             }
         }           
         

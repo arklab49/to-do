@@ -60,11 +60,7 @@
 
 	var _todo2 = _interopRequireDefault(_todo);
 
-	var _login = __webpack_require__(26);
-
-	var _login2 = _interopRequireDefault(_login);
-
-	var _config = __webpack_require__(30);
+	var _config = __webpack_require__(26);
 
 	var _config2 = _interopRequireDefault(_config);
 
@@ -36103,7 +36099,7 @@
 /* 15 */
 /***/ function(module, exports) {
 
-	module.exports = "<style type=\"text/css\">\n    body {\n        background: #F8F8F8\n    }\n</style>\n\n<body ng-app=\"app\" ng-controller=\"TodoController\">\n    <div class=\"container\">\n        <!--<form ng-submit=\"todo.todoAdd()\">-->\n        <!--    <div class=\"form-group\">-->\n        <!--        <input type=\"text\" placeholder=\"Add New\" ng-model=\"todo.todoInput\" size=\"30\">  -->\n        <!--        <button type=\"submit\" class=\"btn btn-success\">Add Task</button>-->\n        <!--    </div>-->\n\n        <!--</form>-->\n\n\n\n        <div class=\"col-md-10 well text-center\">\n            <!--<h2><b><i><span family=\"Verdana\" class=\"text-primary\">What is to do?</span></i></b></h2>-->\n            <form ng-submit=\"todo.todoAdd()\">\n                <div class=\"input-group input-group-lg\">\n                    <input ng-model=\"todo.todoInput\" type=\"text\" class=\"form-control text-center\" placeholder=\"What is to do?\" />\n\n                    <span class=\"input-group-btn\">\n                        <button class=\"btn btn-success\" type=\"submit\" >Add Task</button>\n                    </span>\n                </div>\n            </form>\n        </div>\n        \n        <div class=\"col-md-5 well text-center\" >\n            <p>\n                <bold><font size=\"4px\" color=\"red\"><span ng-bind=\"todo.errorMessage\"></span></font></bold>\n            </p>\n            <div align=\"justify\" ng-show=\"todo.allT\">\n                <all-Tasks></all-Tasks>\n            </div>\n\n            <div ng-show=\"todo.activeT\">\n                <active-Tasks></active-Tasks>\n            </div>\n\n            <div ng-show=\"todo.doneT\">\n                <done-Tasks></done-Tasks>\n            </div>\n        \n            <p>\n                <button ng-click=\"todo.remove()\" class=\"btn btn-danger\">Remove marked</button>\n            </p>\n            <p>\n                <button ng-click=\"todo.showAll()\" ng-class=\"{'btn btn-info': todo.allT, 'btn btn-default': !todo.allT}\">All Tasks</button>\n                <button ng-click=\"todo.showActive()\" ng-class=\"{'btn btn-info': todo.activeT, 'btn btn-default': !todo.activeT}\">Active Tasks</button>\n                <button ng-click=\"todo.showDone()\" ng-class=\"{'btn btn-info': todo.doneT, 'btn btn-default': !todo.doneT}\">Done Tasks</button>\n                </button>\n            </p>\n        </div>\n\n\n\n        <div class=\"col-md-5 well text-center\">\n        <!--<h2><b><i><span family=\"Verdana\" class=\"text-primary\">What is to do?</span></i></b></h2>-->\n        <form ng-submit=\"todo.logIn()\">\n            <div class=\"input-group input-group-lg\" ng-show=\"todo.guest\">\n                <input ng-model=\"todo.mail\" type=\"text\" class=\"form-control text-center\" placeholder=\"Your e-mail\" />\n\n                <span class=\"input-group-btn\">\n            <button \n              class=\"btn btn-success\" \n              type=\"submit\" >Set E-mail</button>\n              </span>\n\n            </div>\n        </form>\n        \n        <div class=\"col-sm-12\" ng-show=\"!todo.guest\">\n                <div class=\"panel panel-primary\">\n                <div class=\"panel-heading\">\n                    <span>User statistics</span> \n                </div>\n                <div class=\"list-group\">\n                    <li class=\"list-group-item\"><strong>Email: </strong>{{todo.mail}}</li>\n                    <li class=\"list-group-item text-center\" align=\"center\">\n                        <button ng-click=\"todo.showStats()\" class=\"btn btn-primary btn-block btn-sm\">{{todo.statsMessage}}</button>\n                    </li>\n                    <div ng-show=\"!todo.showAllStats\">\n                    <li class=\"list-group-item\"><strong>My Tasks: </strong>{{todo.myAllTasksCounter}}</li>\n                    <li class=\"list-group-item\"><strong>My Active Tasks: </strong>{{todo.myActiveTasksCounter}}</li>\n                    <li class=\"list-group-item\"><strong>My Done Tasks: </strong>{{todo.myDoneTasksCounter}}</li>\n                    <li class=\"list-group-item text-center\" align=\"center\">\n                        <button ng-click=\"todo.logOut()\" class=\"btn btn-primary btn-block btn-sm\">Logout</button>\n                    </li>\n                    </div>\n                    \n                    \n                    \n                    <div ng-show=\"todo.showAllStats\">\n                    <li class=\"list-group-item\"><strong>All Tasks: </strong>{{todo.allTasksCounter}}</li>\n                    <li class=\"list-group-item\"><strong>All Active Tasks: </strong>{{todo.activeTasksCounter}}</li>\n                    <li class=\"list-group-item\"><strong>All Done Tasks: </strong>{{todo.doneTasksCounter}}</li>\n                    <li class=\"list-group-item text-center\" align=\"center\">\n                        <button ng-click=\"todo.logOut()\" class=\"btn btn-primary btn-block btn-sm\">Logout</button>\n                    </li>\n                    </div>\n                    \n                        </div>\n                    </div>\n                </div>\n        </div>\n    </div>\n";
+	module.exports = "<style type=\"text/css\">\n    body {\n        background: #F8F8F8\n    }\n</style>\n\n<body ng-app=\"app\" ng-controller=\"TodoController\">\n    <div class=\"container\">\n        <!--<form ng-submit=\"todo.todoAdd()\">-->\n        <!--    <div class=\"form-group\">-->\n        <!--        <input type=\"text\" placeholder=\"Add New\" ng-model=\"todo.todoInput\" size=\"30\">  -->\n        <!--        <button type=\"submit\" class=\"btn btn-success\">Add Task</button>-->\n        <!--    </div>-->\n\n        <!--</form>-->\n\n\n\n        <div class=\"col-md-10 well text-center\">\n            <!--<h2><b><i><span family=\"Verdana\" class=\"text-primary\">What is to do?</span></i></b></h2>-->\n            <form ng-submit=\"todo.todoAdd()\">\n                <div class=\"input-group input-group-lg\">\n                    <input ng-model=\"todo.todoInput\" type=\"text\" class=\"form-control text-center\" placeholder=\"What is to do?\" />\n\n                    <span class=\"input-group-btn\">\n                        <button class=\"btn btn-success\" type=\"submit\" >Add Task</button>\n                    </span>\n                </div>\n            </form>\n        </div>\n        \n        <div class=\"col-md-5 well text-center\" >\n            <p>\n                <bold><font size=\"4px\" color=\"red\"><span ng-bind=\"todo.errorMessage\"></span></font></bold>\n            </p>\n            <div align=\"justify\" ng-show=\"todo.allT\">\n                <all-Tasks></all-Tasks>\n            </div>\n\n            <div ng-show=\"todo.activeT\">\n                <active-Tasks></active-Tasks>\n            </div>\n\n            <div ng-show=\"todo.doneT\">\n                <done-Tasks></done-Tasks>\n            </div>\n        \n            <p>\n                <button ng-click=\"todo.remove()\" class=\"btn btn-danger\">Remove marked</button>\n            </p>\n            <p>\n                <button ng-click=\"todo.showAll()\" ng-class=\"{'btn btn-info': todo.allT, 'btn btn-default': !todo.allT}\">All Tasks</button>\n                <button ng-click=\"todo.showActive()\" ng-class=\"{'btn btn-info': todo.activeT, 'btn btn-default': !todo.activeT}\">Active Tasks</button>\n                <button ng-click=\"todo.showDone()\" ng-class=\"{'btn btn-info': todo.doneT, 'btn btn-default': !todo.doneT}\">Done Tasks</button>\n                </button>\n            </p>\n        </div>\n\n\n\n        <div class=\"col-md-5 well text-center\">\n        <!--<h2><b><i><span family=\"Verdana\" class=\"text-primary\">What is to do?</span></i></b></h2>-->\n        <form ng-submit=\"todo.logIn()\">\n            <div class=\"input-group input-group-lg\" ng-show=\"todo.guest\">\n                <input ng-model=\"todo.mail\" type=\"text\" class=\"form-control text-center\" placeholder=\"Your e-mail\" />\n\n                <span class=\"input-group-btn\">\n            <button \n              class=\"btn btn-success\" \n              type=\"submit\" >Sign In</button>\n              </span>\n\n            </div>\n        </form>\n        \n        <div class=\"col-sm-12\" ng-show=\"!todo.guest\">\n                <div class=\"panel panel-primary\">\n                <div class=\"panel-heading\">\n                    <span>User statistics</span> \n                </div>\n                <div class=\"list-group\">\n                    <li class=\"list-group-item\"><strong>Email: </strong>{{todo.mail}}</li>\n                    <li class=\"list-group-item text-center\" align=\"center\">\n                        <button ng-click=\"todo.showStats()\" class=\"btn btn-primary btn-block btn-sm\">{{todo.statsMessage}}</button>\n                    </li>\n                    <div ng-show=\"!todo.showAllStats\">\n                    <li class=\"list-group-item\"><strong>My Tasks: </strong>{{todo.myAllTasksCounter}}</li>\n                    <li class=\"list-group-item\"><strong>My Active Tasks: </strong>{{todo.myActiveTasksCounter}}</li>\n                    <li class=\"list-group-item\"><strong>My Done Tasks: </strong>{{todo.myDoneTasksCounter}}</li>\n                    <li class=\"list-group-item text-center\" align=\"center\">\n                        <button ng-click=\"todo.logOut()\" class=\"btn btn-primary btn-block btn-sm\">Logout</button>\n                    </li>\n                    </div>\n                    \n                    \n                    \n                    <div ng-show=\"todo.showAllStats\">\n                    <li class=\"list-group-item\"><strong>All Tasks: </strong>{{todo.todoList.length}}</li>\n                    <li class=\"list-group-item\"><strong>All Active Tasks: </strong>{{todo.activeTasksCounter}}</li>\n                    <li class=\"list-group-item\"><strong>All Done Tasks: </strong>{{todo.doneTasksCounter}}</li>\n                    <li class=\"list-group-item text-center\" align=\"center\">\n                        <button ng-click=\"todo.logOut()\" class=\"btn btn-primary btn-block btn-sm\">Logout</button>\n                    </li>\n                    </div>\n                    \n                        </div>\n                    </div>\n                </div>\n        </div>\n    </div>\n";
 
 /***/ },
 /* 16 */
@@ -36147,6 +36143,7 @@
 	    _createClass(TodoController, [{
 	        key: "todoAdd",
 	        value: function todoAdd() {
+
 	            if (this.mail == null) {
 	                this.errorMessage = "You are not log in!";
 	            } else {
@@ -36158,6 +36155,7 @@
 	                    mail: this.mail
 	                });
 	                this.todoInput = "";
+	                this.calcStats();
 	            }
 	        }
 	    }, {
@@ -36165,38 +36163,17 @@
 	        value: function remove() {
 	            var i;
 	            for (i = 0; i < this.todoList.length; i++) {
-	                if (this.todoList[i].done) if (this.mail == this.todoList[i].mail) {
-	                    this.todoList.$remove(i);
+	                if (this.mail == this.todoList[i].mail) {
+	                    if (this.todoList[i].done) this.todoList.$remove(i);
 	                    this.errorMessage = null;
+	                    this.calcStats();
 	                } else this.errorMessage = "This task does not belong to you!";
 	            }
-	            this.showMyList();
-	            if (this.doneT == true) {
-	                this.showDone();
-	                console.log("Jestemn");
-	            }
-	        }
-	    }, {
-	        key: "checkStatus",
-	        value: function checkStatus() {
-	            var tempList = [];
-	            if (this.showAllStats) tempList = this.todoList;else {
-	                this.showMyList();
-	                tempList = this.myAllTasksList;
-	            }
-	            var doneTasks = [];
-	            var activeTasks = [];
-	            var i;
-	            for (i = 0; i < tempList.length; i++) {
-	                if (tempList[i].done) doneTasks.push(tempList[i]);else activeTasks.push(tempList[i]);
-	            }
-	            this.doneTasks = doneTasks;
-	            this.activeTasks = activeTasks;
+	            this.calcStats();
 	        }
 	    }, {
 	        key: "showAll",
 	        value: function showAll() {
-	            this.checkStatus();
 	            this.activeT = false;
 	            this.doneT = false;
 	            this.allT = true;
@@ -36204,7 +36181,6 @@
 	    }, {
 	        key: "showActive",
 	        value: function showActive() {
-	            this.checkStatus();
 	            this.activeT = true;
 	            this.doneT = false;
 	            this.allT = false;
@@ -36212,7 +36188,6 @@
 	    }, {
 	        key: "showDone",
 	        value: function showDone() {
-	            this.checkStatus();
 	            this.doneT = true;
 	            this.allT = false;
 	            this.activeT = false;
@@ -36221,7 +36196,6 @@
 	        key: "logIn",
 	        value: function logIn() {
 	            this.errorMessage = null;
-	            var i;
 	            this.guest = false;
 	            this.calcStats();
 	        }
@@ -36232,43 +36206,18 @@
 	            this.mail = null;
 	            this.showAllStats = true;
 	            this.errorMessage = null;
-	        }
-	    }, {
-	        key: "checkUserTasks",
-	        value: function checkUserTasks($event, i) {
-	            if ($event.target.checked) {
-	                this.todoList[i].completed = true;
-	                this.calcStats();
-	            } else {
-	                this.todoList[i].completed = false;
-	                this.calcStats();
-	            }
-	            this.checkStatus();
+	            this.showAll();
 	        }
 	    }, {
 	        key: "showStats",
 	        value: function showStats() {
 	            this.calcStats();
-	            this.showMyList();
 	            if (!this.showAllStats) {
-	                this.statsMessage = "Show only mine tasks";
+	                this.statsMessage = "Show only my tasks";
 	                this.showAllStats = true;
 	            } else {
 	                this.statsMessage = "Show all tasks";
 	                this.showAllStats = false;
-	            }
-	        }
-	    }, {
-	        key: "showMyList",
-	        value: function showMyList() {
-	            var i;
-	            var myAllTasksList = [];
-
-	            for (i = 0; i < this.todoList.length; i++) {
-	                if (this.todoList[i].mail == this.mail) myAllTasksList.push(this.todoList[i]);
-
-	                this.myAllTasksList = myAllTasksList;
-	                // this.checkStatus2();
 	            }
 	        }
 	    }, {
@@ -36321,7 +36270,7 @@
 /* 18 */
 /***/ function(module, exports) {
 
-	module.exports = "<div ng-show=\"todo.showAllStats\">\n    <div ng-repeat=\"x in todo.todoList\" >\n        <p><input type=\"checkbox\" ng-model=\"x.done\" ng-click=\"todo.checkUserTasks($event,x.index)\"> <font size=\"4px\"><span ng-bind=\"x.todoText\"></span> <span ng-bind=\"x.mail\"></span></font></p>\n    </div>\n</div>\n\n<div ng-show=\"!todo.showAllStats\">\n    <div ng-repeat=\"x in todo.myAllTasksList\" >\n        <p><input type=\"checkbox\" ng-model=\"x.done\" ng-click=\"todo.checkUserTasks($event,x.index)\"> <font size=\"4px\"><span ng-bind=\"x.todoText\"></span> <span ng-bind=\"x.mail\"></span></font></p>\n    </div>\n</div>\n";
+	module.exports = "<div ng-show=\"todo.showAllStats\">\n    <div ng-repeat=\"x in todo.todoList\" >\n        <p><input type=\"checkbox\" ng-model=\"x.done\" ng-click=\"todo.calcStats()\"> <font size=\"4px\"><span ng-bind=\"x.todoText\"></span> ( <span ng-bind=\"x.mail\"></span> )</font> </p>\n    </div>\n</div>\n\n<div ng-show=\"!todo.showAllStats\">\n    <div ng-repeat=\"x in todo.todoList | filter:{mail: todo.mail}\" >\n        <p><input type=\"checkbox\" ng-model=\"x.done\" ng-click=\"todo.calcStats()\"> <font size=\"4px\"><span ng-bind=\"x.todoText\"></span> ( <span ng-bind=\"x.mail\"></span> )</font></p>\n    </div>\n</div>\n";
 
 /***/ },
 /* 19 */
@@ -36344,7 +36293,7 @@
 /* 20 */
 /***/ function(module, exports) {
 
-	module.exports = "<div ng-show=\"todo.showAllStats\">\n    <div ng-repeat=\"x in todo.activeTasks\">\n        <p><input type=\"checkbox\" ng-model=\"x.done\" ng-click=\"todo.checkUserTasks($event,x.index)\"> <font size=\"4px\"><span ng-bind=\"x.todoText\" class=\"bg-success\"></span></font></p>\n    </div>\n</div>\n\n<div ng-show=\"!todo.showAllStats\">\n    <div ng-repeat=\"x in todo.activeTasks\">\n        <p><input type=\"checkbox\" ng-model=\"x.done\" ng-click=\"todo.checkUserTasks($event,x.index)\"> <font size=\"4px\"><span ng-bind=\"x.todoText\" class=\"bg-success\"></span></font></p>\n    </div>\n</div>";
+	module.exports = "<div ng-show=\"todo.showAllStats\">\n    <div ng-repeat=\"x in todo.todoList | filter:{done: false}\">\n        <p><input type=\"checkbox\" ng-model=\"x.done\" ng-click=\"todo.calcStats()\"> <font size=\"4px\"><span ng-bind=\"x.todoText\" class=\"bg-success\"></span></font></p>\n    </div>\n</div>\n\n<div ng-show=\"!todo.showAllStats\">\n    <div ng-repeat=\"x in todo.todoList | filter:{done: false, mail: todo.mail}\">\n        <p><input type=\"checkbox\" ng-model=\"x.done\" ng-click=\"todo.calcStats()\"> <font size=\"4px\"><span ng-bind=\"x.todoText\" class=\"bg-success\"></span></font></p>\n    </div>\n</div>";
 
 /***/ },
 /* 21 */
@@ -36367,7 +36316,7 @@
 /* 22 */
 /***/ function(module, exports) {
 
-	module.exports = "<div ng-show=\"todo.showAllStats\">\n    <div ng-repeat=\"x in todo.doneTasks\">\n        <p><input type=\"checkbox\" ng-model=\"x.done\" ng-click=\"todo.checkUserTasks($event,x.index)\"> <font size=\"4px\"><del><span ng-bind=\"x.todoText\" class=\"bg-warning\"></span></del></font></p>\n    </div>\n</div>\n\n<div ng-show=\"!todo.showAllStats\">\n    <div ng-repeat=\"x in todo.doneTasks\">\n        <p><input type=\"checkbox\" ng-model=\"x.done\" ng-click=\"todo.checkUserTasks($event,x.index)\"> <font size=\"4px\"><del><span ng-bind=\"x.todoText\" class=\"bg-warning\"></span></del></font></p>\n    </div>\n</div>";
+	module.exports = "<div ng-show=\"todo.showAllStats\">\n    <div ng-repeat=\"x in todo.todoList | filter:{done: true}\">\n        <p><input type=\"checkbox\" ng-model=\"x.done\" ng-click=\"todo.calcStats()\"> <font size=\"4px\"><del><span ng-bind=\"x.todoText\" class=\"bg-warning\"></span></del></font></p>\n    </div>\n</div>\n\n<div ng-show=\"!todo.showAllStats\">\n    <div ng-repeat=\"x in todo.todoList | filter:{done: true, mail: todo.mail}\">\n        <p><input type=\"checkbox\" ng-model=\"x.done\" ng-click=\"todo.calcStats()\"> <font size=\"4px\"><del><span ng-bind=\"x.todoText\" class=\"bg-warning\"></span></del></font></p>\n    </div>\n</div>";
 
 /***/ },
 /* 23 */
@@ -39009,117 +38958,6 @@
 
 /***/ },
 /* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _angular = __webpack_require__(10);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	var _angularUiRouter = __webpack_require__(12);
-
-	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
-
-	var _login = __webpack_require__(27);
-
-	var _login2 = _interopRequireDefault(_login);
-
-	var _login3 = __webpack_require__(29);
-
-	var _login4 = _interopRequireDefault(_login3);
-
-	var _firebase = __webpack_require__(23);
-
-	var _firebase2 = _interopRequireDefault(_firebase);
-
-	var _angularfire = __webpack_require__(24);
-
-	var _angularfire2 = _interopRequireDefault(_angularfire);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _angular2.default.module('app.login', [_angularUiRouter2.default, _angularfire2.default]).config(_login2.default).controller('LoginController', _login4.default).name;
-
-/***/ },
-/* 27 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = routes;
-	function routes($stateProvider) {
-	  $stateProvider.state('login', {
-	    url: '/',
-	    template: __webpack_require__(28),
-	    controller: 'LoginController',
-	    controllerAs: 'login'
-	  });
-	}
-
-/***/ },
-/* 28 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\n<form ng-submit=\"login.addNote()\">\n            <div class=\"form-group\">\n                <input type=\"text\" placeholder=\"Add New\" ng-model=\"login.loginMail\" size=\"30\">  \n                <button type=\"submit\" class=\"btn btn-success\">Add New</button>\n            </div>\n            \n            \n            \n            <div class=\"col-md-4\">\n    <table class=\"table\">\n        <tr ng-repeat=\"item in login.items\">\n            <td>{{item.text}}</td>\n            \n        </tr>\n    </table>\n    \n    <form ng-submit=\"login.removeNote()\">\n            <div class=\"form-group\">\n                <input type=\"text\" placeholder=\"Add New\" ng-model=\"login.loginMail\" size=\"30\">  \n                <button type=\"submit\" class=\"btn btn-danger\">Add New</button>\n            </div>";
-
-/***/ },
-/* 29 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	/*global Firebase */
-
-	var LoginController = function () {
-	  function LoginController($firebaseArray) {
-	    _classCallCheck(this, LoginController);
-
-	    // let ref = new Firebase("https://geoinf-todo.firebaseio.com");
-	    var ref = new Firebase("https://geoinformatyka.firebaseio.com/items");
-	    this.items = $firebaseArray(ref);
-	  }
-
-	  _createClass(LoginController, [{
-	    key: 'addNote',
-	    value: function addNote() {
-	      this.items.$add({ text: 'NOWY!' });
-	    }
-	  }, {
-	    key: 'removeNote',
-	    value: function removeNote() {
-	      this.items.$remove({ text: 'NOWY!' });
-	    }
-	  }, {
-	    key: 'getItems',
-	    value: function getItems() {
-	      console.log(this.items.text);
-	      return this.items;
-	    }
-	  }]);
-
-	  return LoginController;
-	}();
-
-	exports.default = LoginController;
-
-/***/ },
-/* 30 */
 /***/ function(module, exports) {
 
 	'use strict';

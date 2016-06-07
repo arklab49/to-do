@@ -1,11 +1,11 @@
 <div ng-show="todo.showAllStats">
-    <div ng-repeat="x in todo.activeTasks">
-        <p><input type="checkbox" ng-model="x.done" ng-click="todo.checkUserTasks($event,x.index)"> <font size="4px"><span ng-bind="x.todoText" class="bg-success"></span></font></p>
+    <div ng-repeat="x in todo.todoList | filter:{done: false}">
+        <p><input type="checkbox" ng-model="x.done" ng-click="todo.calcStats()"> <font size="4px"><span ng-bind="x.todoText" class="bg-success"></span></font></p>
     </div>
 </div>
 
 <div ng-show="!todo.showAllStats">
-    <div ng-repeat="x in todo.activeTasks">
-        <p><input type="checkbox" ng-model="x.done" ng-click="todo.checkUserTasks($event,x.index)"> <font size="4px"><span ng-bind="x.todoText" class="bg-success"></span></font></p>
+    <div ng-repeat="x in todo.todoList | filter:{done: false, mail: todo.mail}">
+        <p><input type="checkbox" ng-model="x.done" ng-click="todo.calcStats()"> <font size="4px"><span ng-bind="x.todoText" class="bg-success"></span></font></p>
     </div>
 </div>
