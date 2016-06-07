@@ -1,0 +1,49 @@
+<div class="col-md-5 well text-center">
+        <!--<h2><b><i><span family="Verdana" class="text-primary">What is to do?</span></i></b></h2>-->
+        <form ng-submit="todo.logIn()">
+            <div class="input-group input-group-lg" ng-show="todo.guest">
+                <input ng-model="todo.mail" type="text" class="form-control text-center" placeholder="Your e-mail" />
+
+                <span class="input-group-btn">
+            <button 
+              class="btn btn-success" 
+              type="submit" >Sign In</button>
+              </span>
+
+            </div>
+        </form>
+        
+        <div class="col-sm-12" ng-show="!todo.guest">
+                <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span>User statistics</span> 
+                </div>
+                <div class="list-group">
+                    <li class="list-group-item"><strong>Email: </strong>{{todo.mail}}</li>
+                    <li class="list-group-item text-center" align="center">
+                        <button ng-click="todo.showStats()" class="btn btn-primary btn-block btn-sm">{{todo.statsMessage}}</button>
+                    </li>
+                    <div ng-show="!todo.showAllStats">
+                    <li class="list-group-item"><strong>My Tasks: </strong>{{todo.myAllTasksCounter}}</li>
+                    <li class="list-group-item"><strong>My Active Tasks: </strong>{{todo.myActiveTasksCounter}}</li>
+                    <li class="list-group-item"><strong>My Done Tasks: </strong>{{todo.myDoneTasksCounter}}</li>
+                    <li class="list-group-item text-center" align="center">
+                        <button ng-click="todo.logOut()" class="btn btn-primary btn-block btn-sm">Logout</button>
+                    </li>
+                    </div>
+                    
+                    
+                    
+                    <div ng-show="todo.showAllStats">
+                    <li class="list-group-item"><strong>All Tasks: </strong>{{todo.todoList.length}}</li>
+                    <li class="list-group-item"><strong>All Active Tasks: </strong>{{todo.activeTasksCounter}}</li>
+                    <li class="list-group-item"><strong>All Done Tasks: </strong>{{todo.doneTasksCounter}}</li>
+                    <li class="list-group-item text-center" align="center">
+                        <button ng-click="todo.logOut()" class="btn btn-primary btn-block btn-sm">Logout</button>
+                    </li>
+                    </div>
+                    
+                        </div>
+                    </div>
+                </div>
+        </div>

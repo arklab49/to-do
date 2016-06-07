@@ -1,0 +1,26 @@
+<div class="col-md-5 well text-center" >
+            <p>
+                <bold><font size="4px" color="red"><span ng-bind="todo.errorMessage"></span></font></bold>
+            </p>
+            <div align="justify" ng-show="todo.allT">
+                <all-Tasks></all-Tasks>
+            </div>
+
+            <div ng-show="todo.activeT">
+                <active-Tasks></active-Tasks>
+            </div>
+
+            <div ng-show="todo.doneT">
+                <done-Tasks></done-Tasks>
+            </div>
+        
+            <p>
+                <button ng-click="todo.remove()" class="btn btn-danger">Remove marked</button>
+            </p>
+            <p>
+                <button ng-click="todo.showAll()" ng-class="{'btn btn-info': todo.allT, 'btn btn-default': !todo.allT}">All Tasks</button>
+                <button ng-click="todo.showActive()" ng-class="{'btn btn-info': todo.activeT, 'btn btn-default': !todo.activeT}">Active Tasks</button>
+                <button ng-click="todo.showDone()" ng-class="{'btn btn-info': todo.doneT, 'btn btn-default': !todo.doneT}">Done Tasks</button>
+                </button>
+            </p>
+        </div>

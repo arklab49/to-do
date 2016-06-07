@@ -60,7 +60,7 @@
 
 	var _todo2 = _interopRequireDefault(_todo);
 
-	var _config = __webpack_require__(26);
+	var _config = __webpack_require__(32);
 
 	var _config2 = _interopRequireDefault(_config);
 
@@ -36064,17 +36064,29 @@
 
 	var _doneTasks2 = _interopRequireDefault(_doneTasks);
 
-	var _firebase = __webpack_require__(23);
+	var _addTask = __webpack_require__(23);
+
+	var _addTask2 = _interopRequireDefault(_addTask);
+
+	var _taskManager = __webpack_require__(25);
+
+	var _taskManager2 = _interopRequireDefault(_taskManager);
+
+	var _userPanel = __webpack_require__(27);
+
+	var _userPanel2 = _interopRequireDefault(_userPanel);
+
+	var _firebase = __webpack_require__(29);
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
-	var _angularfire = __webpack_require__(24);
+	var _angularfire = __webpack_require__(30);
 
 	var _angularfire2 = _interopRequireDefault(_angularfire);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _angular2.default.module('app.todo', [_angularUiRouter2.default, _angularfire2.default]).config(_todo2.default).controller('TodoController', _todo4.default).directive('allTasks', _allTasks2.default).directive('activeTasks', _activeTasks2.default).directive('doneTasks', _doneTasks2.default).name;
+	exports.default = _angular2.default.module('app.todo', [_angularUiRouter2.default, _angularfire2.default]).config(_todo2.default).controller('TodoController', _todo4.default).directive('allTasks', _allTasks2.default).directive('activeTasks', _activeTasks2.default).directive('doneTasks', _doneTasks2.default).directive('addTask', _addTask2.default).directive('taskManager', _taskManager2.default).directive('userPanel', _userPanel2.default).name;
 
 /***/ },
 /* 14 */
@@ -36099,7 +36111,7 @@
 /* 15 */
 /***/ function(module, exports) {
 
-	module.exports = "<style type=\"text/css\">\n    body {\n        background: #F8F8F8\n    }\n</style>\n\n<body ng-app=\"app\" ng-controller=\"TodoController\">\n    <div class=\"container\">\n        <!--<form ng-submit=\"todo.todoAdd()\">-->\n        <!--    <div class=\"form-group\">-->\n        <!--        <input type=\"text\" placeholder=\"Add New\" ng-model=\"todo.todoInput\" size=\"30\">  -->\n        <!--        <button type=\"submit\" class=\"btn btn-success\">Add Task</button>-->\n        <!--    </div>-->\n\n        <!--</form>-->\n\n\n\n        <div class=\"col-md-10 well text-center\">\n            <!--<h2><b><i><span family=\"Verdana\" class=\"text-primary\">What is to do?</span></i></b></h2>-->\n            <form ng-submit=\"todo.todoAdd()\">\n                <div class=\"input-group input-group-lg\">\n                    <input ng-model=\"todo.todoInput\" type=\"text\" class=\"form-control text-center\" placeholder=\"What is to do?\" />\n\n                    <span class=\"input-group-btn\">\n                        <button class=\"btn btn-success\" type=\"submit\" >Add Task</button>\n                    </span>\n                </div>\n            </form>\n        </div>\n        \n        <div class=\"col-md-5 well text-center\" >\n            <p>\n                <bold><font size=\"4px\" color=\"red\"><span ng-bind=\"todo.errorMessage\"></span></font></bold>\n            </p>\n            <div align=\"justify\" ng-show=\"todo.allT\">\n                <all-Tasks></all-Tasks>\n            </div>\n\n            <div ng-show=\"todo.activeT\">\n                <active-Tasks></active-Tasks>\n            </div>\n\n            <div ng-show=\"todo.doneT\">\n                <done-Tasks></done-Tasks>\n            </div>\n        \n            <p>\n                <button ng-click=\"todo.remove()\" class=\"btn btn-danger\">Remove marked</button>\n            </p>\n            <p>\n                <button ng-click=\"todo.showAll()\" ng-class=\"{'btn btn-info': todo.allT, 'btn btn-default': !todo.allT}\">All Tasks</button>\n                <button ng-click=\"todo.showActive()\" ng-class=\"{'btn btn-info': todo.activeT, 'btn btn-default': !todo.activeT}\">Active Tasks</button>\n                <button ng-click=\"todo.showDone()\" ng-class=\"{'btn btn-info': todo.doneT, 'btn btn-default': !todo.doneT}\">Done Tasks</button>\n                </button>\n            </p>\n        </div>\n\n\n\n        <div class=\"col-md-5 well text-center\">\n        <!--<h2><b><i><span family=\"Verdana\" class=\"text-primary\">What is to do?</span></i></b></h2>-->\n        <form ng-submit=\"todo.logIn()\">\n            <div class=\"input-group input-group-lg\" ng-show=\"todo.guest\">\n                <input ng-model=\"todo.mail\" type=\"text\" class=\"form-control text-center\" placeholder=\"Your e-mail\" />\n\n                <span class=\"input-group-btn\">\n            <button \n              class=\"btn btn-success\" \n              type=\"submit\" >Sign In</button>\n              </span>\n\n            </div>\n        </form>\n        \n        <div class=\"col-sm-12\" ng-show=\"!todo.guest\">\n                <div class=\"panel panel-primary\">\n                <div class=\"panel-heading\">\n                    <span>User statistics</span> \n                </div>\n                <div class=\"list-group\">\n                    <li class=\"list-group-item\"><strong>Email: </strong>{{todo.mail}}</li>\n                    <li class=\"list-group-item text-center\" align=\"center\">\n                        <button ng-click=\"todo.showStats()\" class=\"btn btn-primary btn-block btn-sm\">{{todo.statsMessage}}</button>\n                    </li>\n                    <div ng-show=\"!todo.showAllStats\">\n                    <li class=\"list-group-item\"><strong>My Tasks: </strong>{{todo.myAllTasksCounter}}</li>\n                    <li class=\"list-group-item\"><strong>My Active Tasks: </strong>{{todo.myActiveTasksCounter}}</li>\n                    <li class=\"list-group-item\"><strong>My Done Tasks: </strong>{{todo.myDoneTasksCounter}}</li>\n                    <li class=\"list-group-item text-center\" align=\"center\">\n                        <button ng-click=\"todo.logOut()\" class=\"btn btn-primary btn-block btn-sm\">Logout</button>\n                    </li>\n                    </div>\n                    \n                    \n                    \n                    <div ng-show=\"todo.showAllStats\">\n                    <li class=\"list-group-item\"><strong>All Tasks: </strong>{{todo.todoList.length}}</li>\n                    <li class=\"list-group-item\"><strong>All Active Tasks: </strong>{{todo.activeTasksCounter}}</li>\n                    <li class=\"list-group-item\"><strong>All Done Tasks: </strong>{{todo.doneTasksCounter}}</li>\n                    <li class=\"list-group-item text-center\" align=\"center\">\n                        <button ng-click=\"todo.logOut()\" class=\"btn btn-primary btn-block btn-sm\">Logout</button>\n                    </li>\n                    </div>\n                    \n                        </div>\n                    </div>\n                </div>\n        </div>\n    </div>\n";
+	module.exports = "<style type=\"text/css\">\n    body {\n        background: #F8F8F8\n    }\n</style>\n\n<body ng-app=\"app\" ng-controller=\"TodoController\">\n    <div class=\"container\">\n        <add-Task></add-Task>\n        <task-Manager></task-Manager>\n        <user-Panel></user-Panel>\n</div>\n";
 
 /***/ },
 /* 16 */
@@ -36320,6 +36332,75 @@
 
 /***/ },
 /* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = addTask;
+	function addTask() {
+	  return {
+	    restrict: 'E',
+	    template: __webpack_require__(24)
+	  };
+	}
+
+/***/ },
+/* 24 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"col-md-10 well text-center\">\n            <!--<h2><b><i><span family=\"Verdana\" class=\"text-primary\">What is to do?</span></i></b></h2>-->\n            <form ng-submit=\"todo.todoAdd()\">\n                <div class=\"input-group input-group-lg\">\n                    <input ng-model=\"todo.todoInput\" type=\"text\" class=\"form-control text-center\" placeholder=\"What is to do?\" />\n\n                    <span class=\"input-group-btn\">\n                        <button class=\"btn btn-success\" type=\"submit\" >Add Task</button>\n                    </span>\n                </div>\n            </form>\n        </div>\n        ";
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = taskManager;
+	function taskManager() {
+	  return {
+	    restrict: 'E',
+	    template: __webpack_require__(26)
+	  };
+	}
+
+/***/ },
+/* 26 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"col-md-5 well text-center\" >\n            <p>\n                <bold><font size=\"4px\" color=\"red\"><span ng-bind=\"todo.errorMessage\"></span></font></bold>\n            </p>\n            <div align=\"justify\" ng-show=\"todo.allT\">\n                <all-Tasks></all-Tasks>\n            </div>\n\n            <div ng-show=\"todo.activeT\">\n                <active-Tasks></active-Tasks>\n            </div>\n\n            <div ng-show=\"todo.doneT\">\n                <done-Tasks></done-Tasks>\n            </div>\n        \n            <p>\n                <button ng-click=\"todo.remove()\" class=\"btn btn-danger\">Remove marked</button>\n            </p>\n            <p>\n                <button ng-click=\"todo.showAll()\" ng-class=\"{'btn btn-info': todo.allT, 'btn btn-default': !todo.allT}\">All Tasks</button>\n                <button ng-click=\"todo.showActive()\" ng-class=\"{'btn btn-info': todo.activeT, 'btn btn-default': !todo.activeT}\">Active Tasks</button>\n                <button ng-click=\"todo.showDone()\" ng-class=\"{'btn btn-info': todo.doneT, 'btn btn-default': !todo.doneT}\">Done Tasks</button>\n                </button>\n            </p>\n        </div>";
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = userPanel;
+	function userPanel() {
+	  return {
+	    restrict: 'E',
+	    template: __webpack_require__(28)
+	  };
+	}
+
+/***/ },
+/* 28 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"col-md-5 well text-center\">\n        <!--<h2><b><i><span family=\"Verdana\" class=\"text-primary\">What is to do?</span></i></b></h2>-->\n        <form ng-submit=\"todo.logIn()\">\n            <div class=\"input-group input-group-lg\" ng-show=\"todo.guest\">\n                <input ng-model=\"todo.mail\" type=\"text\" class=\"form-control text-center\" placeholder=\"Your e-mail\" />\n\n                <span class=\"input-group-btn\">\n            <button \n              class=\"btn btn-success\" \n              type=\"submit\" >Sign In</button>\n              </span>\n\n            </div>\n        </form>\n        \n        <div class=\"col-sm-12\" ng-show=\"!todo.guest\">\n                <div class=\"panel panel-primary\">\n                <div class=\"panel-heading\">\n                    <span>User statistics</span> \n                </div>\n                <div class=\"list-group\">\n                    <li class=\"list-group-item\"><strong>Email: </strong>{{todo.mail}}</li>\n                    <li class=\"list-group-item text-center\" align=\"center\">\n                        <button ng-click=\"todo.showStats()\" class=\"btn btn-primary btn-block btn-sm\">{{todo.statsMessage}}</button>\n                    </li>\n                    <div ng-show=\"!todo.showAllStats\">\n                    <li class=\"list-group-item\"><strong>My Tasks: </strong>{{todo.myAllTasksCounter}}</li>\n                    <li class=\"list-group-item\"><strong>My Active Tasks: </strong>{{todo.myActiveTasksCounter}}</li>\n                    <li class=\"list-group-item\"><strong>My Done Tasks: </strong>{{todo.myDoneTasksCounter}}</li>\n                    <li class=\"list-group-item text-center\" align=\"center\">\n                        <button ng-click=\"todo.logOut()\" class=\"btn btn-primary btn-block btn-sm\">Logout</button>\n                    </li>\n                    </div>\n                    \n                    \n                    \n                    <div ng-show=\"todo.showAllStats\">\n                    <li class=\"list-group-item\"><strong>All Tasks: </strong>{{todo.todoList.length}}</li>\n                    <li class=\"list-group-item\"><strong>All Active Tasks: </strong>{{todo.activeTasksCounter}}</li>\n                    <li class=\"list-group-item\"><strong>All Done Tasks: </strong>{{todo.doneTasksCounter}}</li>\n                    <li class=\"list-group-item text-center\" align=\"center\">\n                        <button ng-click=\"todo.logOut()\" class=\"btn btn-primary btn-block btn-sm\">Logout</button>\n                    </li>\n                    </div>\n                    \n                        </div>\n                    </div>\n                </div>\n        </div>";
+
+/***/ },
+/* 29 */
 /***/ function(module, exports) {
 
 	/*! @license Firebase v2.4.2
@@ -36605,15 +36686,15 @@
 
 
 /***/ },
-/* 24 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(25);
+	__webpack_require__(31);
 	module.exports = 'firebase';
 
 
 /***/ },
-/* 25 */
+/* 31 */
 /***/ function(module, exports) {
 
 	/*!
@@ -38957,7 +39038,7 @@
 
 
 /***/ },
-/* 26 */
+/* 32 */
 /***/ function(module, exports) {
 
 	'use strict';
